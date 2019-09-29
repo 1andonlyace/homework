@@ -32,7 +32,7 @@
 			$.ajax({ 
 				type: "POST", 
 				url: "http://spartacodingclub.shop/order",
-				data: { name_give:name, count_give:count, address_give:address, phone_give:phone},
+				data: { name_give:name, count_give:count, address_give:address, phone_give:phone, item_give:item },
 				success: function(response){ 
 					if(response['result'] == 'success'){
 						alert('주문완료!'); 
@@ -44,13 +44,14 @@
 		function listing() {
 			$.ajax({
 				type: "GET",
-				url: "http://spartacodingclub.shop/order?item_give=게임보이"
+				url: "http://spartacodingclub.shop/order?item_give=게임보이",
 				data: {},
 				success: function(response){
 					if (response['result'] == 'success') {
 						let orders = response['orders'];
 						for (let i = 0; i < orders.length; i++) {
-							make_card(orders['name'],orders['count'],orders['address'],orders['phone'])
+							let order = orders[i]
+							make_card(order['name'],order['count'],order['address'],order['phone'])
 						}
 					}
 				}
@@ -82,7 +83,6 @@
 			width: 900px;
 			margin: 50px auto;
 		}
-
 		.cntr { 
 			text-align: center; 
 			margin:20px auto 20px auto;
@@ -133,7 +133,6 @@
 	<div class="wrap2">
 		<span style="font-size:30px;font-weight: bold;">GAME BOY</span> &nbsp;&nbsp;&nbsp;
 		<span style="font-size:15px;"> 가격: 1,000,000원 / 개</span>
-
 		<div class="p2">
 			1. 간편한 휴대: 주머니에 쏙 들어가는 깜찍한 크기로 인해 어디서나 신나는 게임 가능<br>
 			2. 긴 게임시간: 4개 밧데리로 타 게임기보다 7~8배나 긴 30시간까지 게임가능(어댑터 사용가능)<br>
